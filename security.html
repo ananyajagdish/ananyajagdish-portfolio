@@ -58,14 +58,9 @@
       <div class="header__text">
         <h1 class="heading-primary">
           <!-- Replace the following name with your name -->
-          <span>Ananya Jagdish</span>
+          <span>Security Projects</span>
         </h1>
         <!-- Put a small paragraph about yourself -->
-        <p>Senior pursuing a dual degree in Computer Science and Finance with a concentration in Cybersecurity. 
-          Member of the Interdisciplinary Business Honors Program and currently interning at Travelers Insurance while 
-           serving as a software developer at Grantuity — a student-led startup that connects grant funding directly to students who need it.
-        </p>
-        <a href="#contact" class="btn btn--pink">Get in touch</a>
       </div>
     </div>
   </header>
@@ -76,20 +71,37 @@
 
     <section class="work" id="work">
       <div class="row">
-        <h2>My Work</h2>
+        <h2>Cryptography ECB Mode</h2>
         <div class="work__boxes">
 
           <!-- Each div with the work__box class is a project. -->
 
           <div class="work__box">
             <div class="work__text">
-              <h3>Security Projects</h3>
               <p>
-                Projects cover attacking weak cipher modes, designing authenticated encryption schemes, 
-                and vulnerability research — both building defenses and breaking them.
-                ECB Mode Cipher Attack — exploiting structural weaknesses in a banking protocol entirely in ciphertext space
-                Secure ATM & Bank System — designed and attacked a cryptographically secure banking protocol
+                Overview
+                A solo project attacking a simulated online banking system that used a 128-bit block cipher in ECB 
+                (Electronic Code Book) mode. ECB is fundamentally broken as a stream cipher: because identical plaintext blocks always 
+                encrypt to identical ciphertext blocks, the structure of messages leaks through the encryption. The goal was to exploit
+                this without ever decrypting anything — the cryptosystem itself was assumed unbreakable.
               </p>
+              <br> <br>
+
+              <p>
+                Approach
+
+                The foundation of all four tasks was a shared binary parser that exploited ECB's core weakness: deterministic block mapping. 
+                Because the same plaintext block always produces the same ciphertext block, recurring values like account numbers and message 
+                type headers leave identifiable fingerprints across the stream — even under encryption.
+                The parser used this property to reverse-engineer message structure without any keys. By observing which ciphertext blocks 
+                repeated and in what positions, and by systematically testing all possible orderings of the three message types, 
+                I was able to identify field boundaries and build a complete structural map of the stream. Once the message format was 
+                understood, each block could be precisely located and manipulated — enabling all four attacks to operate on ciphertext directly, 
+                with no decryption required.
+              </p>
+              <br> <br>
+
+
               <ul class="work__list">
                 <li>OpenSSL</li>
                 <li>Cryptography</li>
