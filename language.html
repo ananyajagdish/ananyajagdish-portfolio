@@ -207,6 +207,54 @@
           </div>
     </section>
 
+    <section class="work" id="work">
+      <div class="row">
+        <h2>Garbage Collection & Memory Management Simulator (Rust)</h2>
+        <div class="work__boxes">
+
+          <!-- Each div with the work__box class is a project. -->
+
+          <div class="work__box">
+            <div class="work__text2">
+                <h3> Overview</h3>
+              <p>
+                
+                Built a systems-level memory management simulator in Rust implementing multiple garbage collection algorithms,
+                 including reference counting, mark-and-sweep, and stop-and-copy collection. The project simulated runtime stack
+                  and heap behavior, tracking object references, reachability, allocation, deallocation, and heap compaction. 
+                  It modeled how programming language runtimes manage dynamic memory and reclaim unreachable objects while maintaining 
+                  pointer consistency across memory regions.
+              </p>
+              <br> <br>
+              <h3> Features Implemented </h3>
+              <ul class="work__list">
+                <li>Implemented a reference counting memory manager that tracked heap object references during stack pushes, 
+                  heap allocations, and object deallocation</li>
+                <li>Added recursive cleanup logic to free chains of unreachable objects when reference counts dropped to zero</li>
+                <li>Built a reachability analysis algorithm using graph traversal to identify all heap objects accessible from stack references</li>
+                <li>Implemented a mark-and-sweep garbage collector that reclaimed unreachable heap memory after traversal</li>
+                <li>Developed a stop-and-copy collector that copied live objects between heap regions and compacted memory</li>
+                <li>Updated all stack and heap pointers after copying to maintain correct object references</li>
+                <li>Simulated stack frames and heap memory using custom Rust data structures</li>
+                <li>Applied Rust’s ownership and borrowing system to safely manage mutable heap structures and references</li>
+              </ul>
+              <br> <br>
+            
+              <ul class="work__list">
+                <li>Rust</li>
+                <li>Garbage Collection Algorithms</li>
+                <li>Systems Programming</li>
+                <li>Heap & Stack Memory Management</li>
+                <li>Reference Counting</li>
+                <li>Mark-and-Sweep Collection</li>
+                <li>Stop-and-Copy Collection</li>
+              </ul>
+              <br> <br>
+
+            </div>
+          </div>
+    </section>
+
 
       <!-- If you give me some credit by keeping the below paragraph, will be huge for me 😊 Thanks. -->
       <p>
