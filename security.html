@@ -51,17 +51,14 @@
     <div class="header__text-box row">
       <div class="header__text">
         <h1 class="heading-primary">
-          <!-- Replace the following name with your name -->
           <span>Security Projects</span>
         </h1>
-        <!-- Put a small paragraph about yourself -->
       </div>
     </div>
   </header>
 
   <main role="main">
 
-    <!-- ***** Work ***** -->
 
     <section class="work" id="work">
       <div class="row">
@@ -94,78 +91,106 @@
                 with no decryption required.
               </p>
               <br> <br>
+              <h4> Attack 1</h4>
+              <p>Parse an unknown ciphertext session and correctly identify all message types in order — validating the 
+                parser against sessions with unknown request sequences and different keys.</p>
+                <br> <br>
 
+                <h4> Attack 2</h4>
+                <p>Identify the one TRANSFER directed to my account and send a copy of it to the output stream. </p>
+                  <br> <br>
+                
+                  <h4> Attack 3</h4>
+                  <p>Locate a $10 TRANSFER to my account and swap its amount field with a larger value found elsewhere in the stream — entirely in ciphertext.
+                     The bank decrypts a larger amount than the sender intended. </p>
+                    <br> <br>
+                  
+                    <h4> Attack 4</h4>
+                    <p>Convert an INVOICE (payment request from my account) into a TRANSFER (money sent to my account) 
+                        by reconstructing the message structure using blocks from elsewhere in the stream. 
+                        Flips the direction of money flow without decrypting anything. </p>
+                      <br> <br>
 
               <ul class="work__list">
-                <li>OpenSSL</li>
                 <li>Cryptography</li>
-                <li>AES-256-GCM</li>
                 <li>Python</li>
                 <li>C</li>
                 <li>Binary Parsing</li>
               </ul>
+              <br> <br>
 
             </div>
           </div>
-
-          <div class="work__box">
-            <div class="work__text">
-              <h3>Calculator</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
-                eius.
-              </p>
-              <ul class="work__list">
-                <li>React</li>
-                <li>Next.js</li>
-                <li>Node</li>
-                <li>MongoDB</li>
-              </ul>
-
-              <div class="work__links">
-                <a href="#" class="link__text">
-                  Visit Site <span>&rarr;</span>
-                </a>
-                <a href="#">
-                  <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
-                </a>
-              </div>
-            </div>
-            <div class="work__image-box">
-              <img src="./images/project-2.png" class="work__image" alt="Project 1" />
-            </div>
-          </div>
-
-          <div class="work__box">
-            <div class="work__text">
-              <h3>Notificator</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
-                eius.
-              </p>
-              <ul class="work__list">
-                <li>React</li>
-                <li>Next.js</li>
-                <li>Node</li>
-                <li>MongoDB</li>
-              </ul>
-
-              <div class="work__links">
-                <a href="#" class="link__text">
-                  Visit Site <span>&rarr;</span>
-                </a>
-                <a href="#">
-                  <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
-                </a>
-              </div>
-            </div>
-            <div class="work__image-box">
-              <img src="./images/project-3.png" class="work__image" alt="Project 3" />
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
+
+
+    <section class="work" id="work">
+        <div class="row">
+          <h2>Cryptography ECB Mode</h2>
+          <div class="work__boxes">
+  
+            <!-- Each div with the work__box class is a project. -->
+  
+            <div class="work__box">
+              <div class="work__text2">
+                  <h3> Secure ATM & Bank System</h3>
+                  <h4> Team (Build) · Solo (Break)</h4>
+                <p>
+                  
+                    A team project to design and implement a secure ATM and banking system in C. The system had to remain secure even if the attacker knew a user's PIN but not their card, 
+                    or had their card but not their PIN. It also had to account for packet sniffing or replay attacks.
+                </p>
+                <br> <br>
+                <h3> My Contribution </h3>
+                <p>
+  
+                    I was responsible for the ATM client program — the C executable handling all user-facing interaction and 
+                    constructing encrypted messages to the bank. This included session management, command parsing, 
+                    and integrating with the shared cryptographic layer. I also implemented PIN hashing using OpenSSL's EVP message digest 
+                    API: rather than storing raw PINs in card files, the system hashes each PIN with SHA-256 and a salt, so even a stolen 
+                    card file reveals nothing about the actual PIN.
+                </p>
+                <br> <br>
+
+                <h3> Vulnerabilities Defended Against </h3>
+                <ul class="work__list">
+                    <li>Replay attacks — per-message nonces and monotonically increasing sequence numbers inside the 
+                        GCM-authenticated payload prevent the attacker from reusing captured packets.</li>
+                    <li>Packet tampering — AES-256-GCM's authentication tag detects any in-transit modification; 
+                        tampered messages are dropped by the bank.</li>
+                    <li>Plaintext PIN storage — SHA-256 hashing with salt means card files never contain recoverable PIN data.</li>
+                    <li>Buffer overflow — strict input length validation across all ATM commands prevents stack corruption and 
+                        potential code injection.</li>
+                    <li>Integer overflow on withdrawal — bounds checking on withdrawal amounts prevents negative-value exploits 
+                        that would effectively deposit money into an account. </li>
+                  </ul>
+                <br> <br>
+
+
+                  <h3> Break-it </h3>
+                  <p>
+  
+                    In the offensive phase, I analyzed another team's implementation and identified that they had no rate limiting or 
+                    lockout mechanism on failed PIN attempts. I wrote a C program that generated all 10,000 four-digit PIN combinations, 
+                    formatted each as a valid begin-session command, and fed them sequentially into their ATM program.
+                    Since the team's ATM accepted unlimited incorrect attempts without tracking failures, 
+                    the program successfully brute-forced the correct PIN and authenticated as the target user. I was then able to withdraw 
+
+                </p>
+                <br> <br>
+  
+  
+                <ul class="work__list">
+                  <li>OpenSSL</li>
+                  <li>Cryptography</li>
+                  <li>AES-256-GCM</li>
+                  <li>C</li>
+                </ul>
+  
+              </div>
+            </div>
+      </section>
+
 
     <!-- ***** Clients ***** -->
 
