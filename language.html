@@ -1,0 +1,197 @@
+<!-- 
+  Hello 😊.
+
+  This template is designed and developed by Nisar Hassan Naqvi
+  for anyone to use for free or customize the way they like.
+
+  Github Repo: https://github.com/nisarhassan12/portfolio-template/
+  My Website: https://nisar.dev
+
+  For business & inquires, contact me => syednisarhassan12@gmail.com
+-->
+
+<!--
+  Follow the instructions written in comments to create your stunning portfolio
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+
+  <!-- Put your site title here -->
+  <title>
+    Ananya Jagdish | Gradutation: Spring 2027
+  </title>
+
+  <meta name="description" content="Add small description of yourslef.">
+  <!-- Add some coding keywords below, Ex: (React, CSS etc) -->
+  <meta name="keywords" content="Ananya Jagdish ,  Rust, TypeScript/JavaScript, Python, Java, C, C++, OCaml, HTML, CSS,React.js, Node.js,
+   Django, Django REST, Mongoose, Ajax,Docker, Kubernetes, CI/CD (Jenkins), Terraform, Ansible, AWS, Prometheus, Grafana,MySQL, 
+   SQLite, MongoDB, Supabase, Git, Figma, VS Code, IntelliJ,TensorFlow, Pytesseract OCR" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+  <!-- ***** Header ***** -->
+
+  <header class="header" role="banner" id="top">
+    <div class="row">
+      <nav class="nav" role="navigation">
+        <ul class="nav__items">
+        <li class="nav__item"><a href="./index.html" class="nav__link">&#8592; Back</a></li>
+         
+        </ul>
+      </nav>
+    </div>
+    <div class="header__text-box row">
+      <div class="header__text">
+        <h1 class="heading-primary">
+          <span>Languages & Compilers Projects</span>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <main role="main">
+
+
+    <section class="work" id="work">
+      <div class="row">
+        <h2>Compiler Construction</h2>
+        <div class="work__boxes">
+
+          <!-- Each div with the work__box class is a project. -->
+
+          <div class="work__box">
+            <div class="work__text2">
+                <h3> Overview</h3>
+              <p>
+                
+                A semester-long solo project building a compiler incrementally in Racket, targeting a86 — a simplified subset of 
+                x86-64 assembly represented as Racket data structures. Each assignment extended the compiler with new language features,
+                 from basic primitives all the way to pattern matching and exception handling.
+              </p>
+              <br> <br>
+              <h3> Features Implemented </h3>
+              
+              <ul class="work__list">
+                <li>Primitives & Cond — added abs, unary -, not, and cond expressions with type-error signalling </li>
+                <li>Case expressions — dispatch on integer/boolean values, compiled to chains of cmp and je instructions</li>
+                <li>Multi-binding let and let* — generalized let to bind any number of variables simultaneously; let* with forward-referencing bindings</li>
+                <li>List & Vector primitives — heap-allocated values; implemented length, reverse, list->vector, vector->list with type checking</li>
+                <li>Variable-arity & case-lambda — rest arguments collected into lists at runtime; arity dispatch compiled to generated check-and-branch sequences</li>
+                <li>Pattern matching — compiled match expressions for list, vector, and predicate patterns against nested structures</li>
+                <li> Exception handling — implemented raise and with-handlers; used a designated register to hold a pointer to the current handler on the stack, with each handler storing predicate, 
+                function, return label, and parent handler pointer for nested handlers.</li>
+            </ul>
+            <p>Every feature added was implemented at two levels: the interpreter 
+                (to define correct behavior) and the compiler (to generate correct a86 assembly). </p>
+             
+              <br> <br>
+              
+              <ul class="work__list">
+                <li>Racket</li>
+                <li>a86 Assembly</li>
+                <li>Compiler Design</li>
+                <li>Stack Management</li>
+              </ul>
+              <br> <br>
+
+            </div>
+          </div>
+    </section>
+
+
+    <section class="work" id="work">
+        <div class="row">
+          <h2>Secure ATM & Bank System</h2>
+          <div class="work__boxes">
+  
+            <!-- Each div with the work__box class is a project. -->
+  
+            <div class="work__box">
+              <div class="work__text2">
+                 
+                  <h4> Team (Build) · Solo (Break)</h4>
+                <p>
+                  
+                    A team project to design and implement a secure ATM and banking system in C. The system had to remain secure even if the attacker knew a user's PIN but not their card, 
+                    or had their card but not their PIN. It also had to account for packet sniffing or replay attacks.
+                </p>
+                <br> <br>
+                <h3> My Contribution </h3>
+                <p>
+  
+                    I was responsible for the ATM client program which handled all user-facing interaction and 
+                    constructed encrypted messages to the bank. This included session management, command parsing, 
+                    and send messgaes to the bank program. I also implemented PIN hashing using OpenSSL's EVP message digest 
+                    API: rather than storing raw PINs in card files, the system hashes each PIN with SHA-256 and a salt, so even a stolen 
+                    card file reveals nothing about the actual PIN.
+                </p>
+                <br> <br>
+
+                <h3> Vulnerabilities Defended Against </h3>
+                <ul class="work__list">
+                    <li>Replay attacks — per-message nonces and monotonically increasing sequence numbers inside the 
+                        GCM-authenticated payload prevent the attacker from reusing captured packets.</li>
+                    <li>Packet tampering — AES-256-GCM's authentication tag detects any in-transit modification; 
+                        tampered messages are dropped by the bank.</li>
+                    <li>Plaintext PIN storage — SHA-256 hashing with salt means card files never contain recoverable PIN data.</li>
+                    <li>Buffer overflow — strict input length validation across all ATM commands prevents stack corruption and 
+                        potential code injection.</li>
+                    <li>Integer overflow on withdrawal — bounds checking on withdrawal amounts prevents negative-value exploits 
+                        that would effectively deposit money into an account. </li>
+                  </ul>
+                <br> <br>
+
+
+                  <h3> Break-it </h3>
+                  <p>
+  
+                    In the offensive phase, I analyzed another team's implementation and identified that they had no rate limiting or 
+                    lockout mechanism on failed PIN attempts. I wrote a C program that generated all 10,000 four-digit PIN combinations, 
+                    formatted each as a valid begin-session command, and fed them sequentially into their ATM program.
+                    Since the team's ATM accepted unlimited incorrect attempts without tracking failures, 
+                    the program successfully brute-forced the correct PIN and authenticated as the target user. I was then able to withdraw 
+
+                </p>
+                <br> <br>
+  
+  
+                <ul class="work__list">
+                  <li>OpenSSL</li>
+                  <li>Cryptography</li>
+                  <li>AES-256-GCM</li>
+                  <li>C</li>
+                </ul>
+  
+              </div>
+            </div>
+      </section>
+
+
+      <!-- If you give me some credit by keeping the below paragraph, will be huge for me 😊 Thanks. -->
+      <p>
+        &copy; 2020 - Template designed & developed by <a href="https://nisar.dev" class="link">Nisar</a>.
+      </p>
+      <div class="footer__github-buttons">
+        <iframe
+          src="https://ghbtns.com/github-btn.html?user=nisarhassan12&repo=ananyajagdish-portfolio&type=watch&count=true"
+          frameborder="0" scrolling="0" width="170" height="20" title="Watch Portfolio Template on GitHub">
+        </iframe>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" class="back-to-top" title="Back to Top">
+    <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image"/>
+  </a>
+  <script src="./index.js"></script>
+</body>
+
+</html>
