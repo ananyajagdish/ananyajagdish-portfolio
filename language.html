@@ -62,7 +62,7 @@
 
     <section class="work" id="work">
       <div class="row">
-        <h2>Compiler Construction</h2>
+        <h2>Compiler Construction (Racket)</h2>
         <div class="work__boxes">
 
           <!-- Each div with the work__box class is a project. -->
@@ -108,71 +108,104 @@
 
 
     <section class="work" id="work">
-        <div class="row">
-          <h2>Secure ATM & Bank System</h2>
-          <div class="work__boxes">
-  
-            <!-- Each div with the work__box class is a project. -->
-  
-            <div class="work__box">
-              <div class="work__text2">
+      <div class="row">
+        <h2>SmallC Lexer, Parser, and Evaluator (OCaml)</h2>
+        <div class="work__boxes">
+
+          <!-- Each div with the work__box class is a project. -->
+
+          <div class="work__box">
+            <div class="work__text2">
+                <h3> Overview</h3>
+              <p>
+                
+                A solo project implementing a complete compiler frontend and interpreter for SmallC — a statically typed subset of C — in OCaml. 
+                The project covered all three stages of language processing: lexing raw source code into tokens, parsing tokens into an abstract 
+                syntax tree, and evaluating the AST against a runtime environment. The language supports integers, booleans, arithmetic, 
+                conditionals, loops, print statements, and full function definitions with calls.
+              </p>
+              <br> <br>
+              <h3> Lexer </h3>
+              
+            <p>
+              The lexer converts raw SmallC source code into a token list using regular expression matching. 
+              Key challenges included longest-match disambiguation — for example, while0 must lex as an identifier not a keyword — 
+              and handling negative integer literals correctly. The lexer handles all whitespace, keywords, operators, identifiers, 
+              and literals, terminating every output with an EOF token. </p>
+             
+              <br> <br>
+              <h3> Parser </h3>
+              <p>
+              
+              The parser consumes the token stream and produces a typed AST using a hand-written recursive descent parser 
+              following a context-free grammar. Operator precedence is encoded directly in the grammar hierarchy — from OrExpr down 
+              through AndExpr, EqualityExpr, RelationalExpr, AdditiveExpr, MultiplicativeExpr, PowerExpr, and UnaryExpr. The statement parser 
+              builds on top of the expression parser to handle declarations, assignments, if/else, while, for loops, and print. The top-level 
+              parser handles full function definitions and enforces that no two parameters share a name and no function is defined twice. </p>
+               
+                <br> <br>
+              
+                <h3>  Evaluator </h3>
+                <p>
+                
+                  The evaluator walks the AST against an environment represented as a list of variable bindings and function definitions. 
+                  It enforces static type safety at runtime — raising TypeError on mismatched operands, DivByZeroError on division by zero, and DeclareError
+                   on undefined or duplicate variables. Function calls create a fresh environment and binds arguments to parameters while 
+                   carrying over only the function definitions. Return values are bound to a special "return" identifier in the environment and 
+                   type-checked against the function's declared return type. </p>
                  
-                  <h4> Team (Build) · Solo (Break)</h4>
-                <p>
-                  
-                    A team project to design and implement a secure ATM and banking system in C. The system had to remain secure even if the attacker knew a user's PIN but not their card, 
-                    or had their card but not their PIN. It also had to account for packet sniffing or replay attacks.
-                </p>
-                <br> <br>
-                <h3> My Contribution </h3>
-                <p>
-  
-                    I was responsible for the ATM client program which handled all user-facing interaction and 
-                    constructed encrypted messages to the bank. This included session management, command parsing, 
-                    and send messgaes to the bank program. I also implemented PIN hashing using OpenSSL's EVP message digest 
-                    API: rather than storing raw PINs in card files, the system hashes each PIN with SHA-256 and a salt, so even a stolen 
-                    card file reveals nothing about the actual PIN.
-                </p>
-                <br> <br>
+                  <br> <br>
+              
+              <ul class="work__list">
+                <li>OCaml</li>
+                <li>Lexing</li>
+                <li>Recursive Descent Parsing</li>
+                <li>AST Design</li>
+              </ul>
+              <br> <br>
 
-                <h3> Vulnerabilities Defended Against </h3>
-                <ul class="work__list">
-                    <li>Replay attacks — per-message nonces and monotonically increasing sequence numbers inside the 
-                        GCM-authenticated payload prevent the attacker from reusing captured packets.</li>
-                    <li>Packet tampering — AES-256-GCM's authentication tag detects any in-transit modification; 
-                        tampered messages are dropped by the bank.</li>
-                    <li>Plaintext PIN storage — SHA-256 hashing with salt means card files never contain recoverable PIN data.</li>
-                    <li>Buffer overflow — strict input length validation across all ATM commands prevents stack corruption and 
-                        potential code injection.</li>
-                    <li>Integer overflow on withdrawal — bounds checking on withdrawal amounts prevents negative-value exploits 
-                        that would effectively deposit money into an account. </li>
-                  </ul>
-                <br> <br>
-
-
-                  <h3> Break-it </h3>
-                  <p>
-  
-                    In the offensive phase, I analyzed another team's implementation and identified that they had no rate limiting or 
-                    lockout mechanism on failed PIN attempts. I wrote a C program that generated all 10,000 four-digit PIN combinations, 
-                    formatted each as a valid begin-session command, and fed them sequentially into their ATM program.
-                    Since the team's ATM accepted unlimited incorrect attempts without tracking failures, 
-                    the program successfully brute-forced the correct PIN and authenticated as the target user. I was then able to withdraw 
-
-                </p>
-                <br> <br>
-  
-  
-                <ul class="work__list">
-                  <li>OpenSSL</li>
-                  <li>Cryptography</li>
-                  <li>AES-256-GCM</li>
-                  <li>C</li>
-                </ul>
-  
-              </div>
             </div>
-      </section>
+          </div>
+    </section>
+
+    <section class="work" id="work">
+      <div class="row">
+        <h2>Type Inference Engine for Functional Programming Language (OCaml)</h2>
+        <div class="work__boxes">
+
+          <!-- Each div with the work__box class is a project. -->
+
+          <div class="work__box">
+            <div class="work__text2">
+                <h3> Overview</h3>
+              <p>
+                
+                Built a static type inference engine in OCaml for a custom functional programming language, implementing constraint-based type checking and 
+                unification. The project automatically inferred types for expressions without explicit type 
+                annotations, supporting integers, booleans, functions, recursive bindings, records, conditionals, and binary operations.
+              </p>
+              <br> <br>
+              <h3> Features Implemented </h3>
+              <ul class="work__list">
+                <li>Implemented a constraint generation and unification algorithm to infer types across complex expressions</li>
+                <li>Built a substitution system to propagate inferred types through expressions and resolve temporary type variables</li>
+                <li>Added validation to prevent invalid recursive type constructions during unification</li>
+                <li>Managed scoped environments for variable lookup and function inference</li>
+                <li>Used recursive AST traversal to generate type constraints and perform type resolution.</li>
+              </ul>
+              <br> <br>
+            
+              <ul class="work__list">
+                <li>OCaml</li>
+                <li>Type Systems</li>
+                <li>Abstract Syntax Trees (ASTs)</li>
+                <li>Type Inference</li>
+              </ul>
+              <br> <br>
+
+            </div>
+          </div>
+    </section>
 
 
       <!-- If you give me some credit by keeping the below paragraph, will be huge for me 😊 Thanks. -->
