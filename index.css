@@ -497,13 +497,19 @@ body:not(.user-is-tabbing) a:focus {
 }
 
 .work__image-box {
-    margin-bottom: var(--gutter-normal);
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media(min-width: 901px) {
     .work__image-box {
-        flex: 1;
-        margin: 0 0 0 10rem;
+        width: 100%;
+    max-width: 500px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
     }
 }
 
