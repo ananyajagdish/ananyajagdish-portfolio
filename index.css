@@ -498,7 +498,7 @@ body:not(.user-is-tabbing) a:focus {
 
 .work__image-box {
     flex: 1;
-    margin-left: 14rem;  
+    margin-left: 140rem;  
     margin-top: -3rem;
     display: flex;
     justify-content: center;
